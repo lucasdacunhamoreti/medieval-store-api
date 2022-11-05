@@ -12,8 +12,8 @@ export default class UserService {
 
   public validateUser = new ValidateUser();
 
-  public async newUser(user: IUser): Promise<string> {
-    const { error } = this.validateUser.validateUser(user);
+  public async newUser(userData: IUser): Promise<string> {
+    const { error } = this.validateUser.validateUser(userData);
     
     if (error) {
       const typeMessage = error.details[0].type;
@@ -28,7 +28,7 @@ export default class UserService {
       }
     }
 
-    const userRegistered = await this.user.newUser(user);
+    const userRegistered = await this.user.newUser(userData);
 
     return this.jwt.generateToken(userRegistered);
   }

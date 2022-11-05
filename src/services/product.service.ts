@@ -9,8 +9,8 @@ export default class ProductService {
 
   public validateProduct = new ValidateProduct();
 
-  public newProduct(product: IProduct): Promise<IProduct> {
-    const { error } = this.validateProduct.validateProduct(product);
+  public newProduct(productData: IProduct): Promise<IProduct> {
+    const { error } = this.validateProduct.validateProduct(productData);
     
     if (error) {
       const typeMessage = error.details[0].type;
@@ -25,7 +25,7 @@ export default class ProductService {
       }
     }
     
-    return this.product.newProduct(product);
+    return this.product.newProduct(productData);
   }
 
   public getAll(): Promise<IProduct[]> {
