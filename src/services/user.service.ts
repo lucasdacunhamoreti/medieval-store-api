@@ -1,14 +1,14 @@
-import jsonwebtoken from 'jsonwebtoken';
 import { IUser } from '../interfaces/IUser';
 import UserModel from '../models/user.model';
 import ValidateUser from '../validations/user.validate';
 import HttpException from '../utils/http.exception';
 import mapError from '../utils/mapError';
+import JwtUtil from '../utils/jwt.util';
 
 export default class UserService {
   public user = new UserModel();
 
-  public jwt = jsonwebtoken;
+  public jwt = new JwtUtil();
 
   public validateUser = new ValidateUser();
 
@@ -30,17 +30,6 @@ export default class UserService {
 
     const userRegistered = await this.user.newUser(user);
 
-    const token = this.generateToken(userRegistered);
-    
-    return token;
-  }
-
-  public generateToken(user: IUser): string {
-    const payload = { id: user.id, username: user.username }; 
-    return this.jwt.sign(
-      payload, 
-      process.env.JWT_SECRET as string,
-      { algorithm: 'HS256', expiresIn: '1d' },
-    );
+    return this.jwt.generateToken(userRegistered);
   }
 }
