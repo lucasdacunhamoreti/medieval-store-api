@@ -37,4 +37,15 @@ export default class AuthService {
     
     return this.jwt.generateToken(userData);
   }
+
+  public verifyToken(token: string): ILogin {
+    if (!token || token.length === 0) {
+      throw new HttpException(mapError('UNAUTHORIZED'), 'Token not found');
+    }
+
+    const payload = this.jwt.validateToken(token) as ILogin;
+    console.log(payload, 'payload');
+    
+    return payload;
+  }
 }
