@@ -8,9 +8,12 @@ export default class ValidateToken {
   async tokenValidate(req: IExtendedRequest, _res: Response, next: NextFunction) {
     const { authorization } = req.headers;
     const token = authorization as string;
+    console.log(token, 'token');
     
     const payload = this.authService.verifyToken(token);
 
+    console.log(payload, 'teste');
+    
     const { id, username } = payload;
     
     req.user = { id, username } as IUserPayload;

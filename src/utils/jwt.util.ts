@@ -1,14 +1,16 @@
 import dotenv from 'dotenv';
-import Jsonwebtoken, { JwtPayload } from 'jsonwebtoken';
+import Jsonwebtoken from 'jsonwebtoken';
 import { ILogin } from '../interfaces/ILogin';
 import { IUser } from '../interfaces/IUser';
+import HttpException from './http.exception';
+import mapError from './mapError';
 // import HttpException from './http.exception';
 // import mapError from './mapError';
 
 dotenv.config();
 
 export default class JwtUtil {
-  jwt = Jsonwebtoken;
+  public jwt = Jsonwebtoken;
 
   public generateToken(userData: ILogin | IUser): string {
     const { id, username } = userData;
@@ -22,8 +24,11 @@ export default class JwtUtil {
   }
 
   public validateToken(token: string) {
-    const payload = this.jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
-    
-    return payload;
+    try {
+      const payload = this.jwt.verify(token, process.env.JWT_SECRET as string);
+      return payload;
+    } catch (error) {
+      throw new HttpException(mapError('UNAUTHORIZED'), 'Invalid token');
+    }
   }
 }

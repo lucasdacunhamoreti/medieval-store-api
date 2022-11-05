@@ -44,7 +44,7 @@ export default class AuthService {
     }
 
     const payload = this.jwt.validateToken(token) as ILogin;
-    console.log(payload, 'payload');
+    console.log(payload, 'tomate');
     
     return payload;
   }

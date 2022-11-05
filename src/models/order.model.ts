@@ -1,6 +1,8 @@
-import { RowDataPacket } from 'mysql2';
+import { RowDataPacket, ResultSetHeader } from 'mysql2';
 import mysql from './connection';
-import { IOrder } from '../interfaces/IOrder';
+import { IOrder, IProductsId } from '../interfaces/IOrder';
+import { IUserPayload } from '../interfaces/ILogin';
+import { IProduct } from '../interfaces/IProduct';
 
 export default class OrderModel {
   private connection = mysql;
@@ -16,5 +18,30 @@ export default class OrderModel {
       `,
     );
     return result;
+  }
+
+  public async newOrder(product:IProductsId, userData: IUserPayload): Promise<IProductsId> {
+    const { productsIds } = product;
+
+    const [{ insertId }] = await this.connection.execute<ResultSetHeader>(
+      'INSERT INTO Trybesmith.Orders (userId) VALUES (?)',
+      [userData.id],
+    );
+
+    await Promise.all(productsIds.map(async (id) => {
+      const [[result]] = await this.connection.execute<RowDataPacket[] & IProduct[]>(
+        'SELECT * FROM Trybesmith.Products WHERE id = ?',
+        [id],
+      );
+    
+      await this.connection.execute<ResultSetHeader>(
+        'INSERT INTO Trybesmith.Products (name, amount, orderId) VALUES (?, ?, ?)',
+        [result.name, result.amount, insertId],
+      );
+    }));
+
+    console.log(userData.id);
+    
+    return { userId: userData.id, productsIds };
   }
 }
