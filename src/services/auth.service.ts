@@ -1,4 +1,3 @@
-// import jsonwebtoken from 'jsonwebtoken';
 import { ILogin } from '../interfaces/ILogin';
 import AuthModel from '../models/auth.model';
 import ValidateLogin from '../validations/login.validate';
@@ -44,7 +43,6 @@ export default class AuthService {
     }
 
     const payload = this.jwt.validateToken(token) as ILogin;
-    console.log(payload, 'tomate');
     
     return payload;
   }

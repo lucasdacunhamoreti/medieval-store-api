@@ -4,8 +4,6 @@ import { ILogin } from '../interfaces/ILogin';
 import { IUser } from '../interfaces/IUser';
 import HttpException from './http.exception';
 import mapError from './mapError';
-// import HttpException from './http.exception';
-// import mapError from './mapError';
 
 dotenv.config();
 
