@@ -7,11 +7,11 @@ const routerOrder = Router();
 const orderController = new OrderController();
 const authMiddleware = new AuthMiddleware();
 
-routerOrder.get('/', orderController.getAll.bind(orderController));
+routerOrder.get('/', orderController.getAll);
 routerOrder.post(
   '/',
-  authMiddleware.tokenValidate.bind(authMiddleware),
-  orderController.newOrder.bind(orderController),
+  authMiddleware.verifyAccess,
+  orderController.newOrder,
 );
 
 export default routerOrder;

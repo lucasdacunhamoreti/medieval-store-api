@@ -5,10 +5,10 @@ const routerProduct = Router();
 
 const productController = new ProductController();
 
-routerProduct.post('/', productController.newProduct.bind(productController));
+routerProduct.post('/', productController.newProduct);
 routerProduct.get(
   '/',
-  productController.getAll.bind(productController),
+  productController.getAll,
 );
 
 export default routerProduct;
