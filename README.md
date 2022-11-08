@@ -1,16 +1,34 @@
-# Projeto Trybesmith
+# Medieval Store
+> Criação de uma API de loja para itens medievais. 
 
-Olá. Bem vindo ao projeto Trybesmith. Esta aplicação consiste na construção de uma loja de itens medievais utilizando as tecnologias aprendidas durante o curso da Trybe.
+## 💻 Projeto
 
-# Funcionamento
-A aplicação possui a funcionalidade de listar e cadastrar usuários, rotas autenticadas pelo login do usuário e cadastro de produtos e pedidos.
+Neste projeto foi desenvolvido um CRUD para cadastro e listagem de produtos, cadastro e login de usuários, cadastro e listagem de pedidos e rotas autenticadas.
 
-# Tecnologias utilizadas
+## 🚀 Tecnologias
+> Este projeto foi desenvolvido com as seguintes tecnologias:
+
 - NodeJs
-- ExpressJS
-- Arquitetura MSC
-- Mysql
-- JWT
-- JOI
-- Typescript
+- Express
 - ExpressAsyncErrors
+- JOI
+- MYSQL
+- Arquitetura MSC
+- Docker
+- JWT
+- Typescript
+
+## 📌 Habilidades
+
+> Neste projeto, desenvolvi as seguintes habilidades:
+
+- Tipar dados utilizando Typescript;
+- Criar métodos usando classes;
+- Tratamento de erros personalizados;
+
+## 💬 Contatos
+
+<div align="center" style="display: inline_block">
+  <a href="https://www.linkedin.com/in/lucas-da-cunha-moreti/" target="_blank"><img height="28rem" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a> 
+  <a href = "mailto:lucasdacunha00@gmail.com"><img height="28rem" src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
+</div>
